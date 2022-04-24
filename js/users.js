@@ -9,7 +9,17 @@ window.onload = function(){
     xhr.open('GET', "https://jsonplaceholder.typicode.com/users", true);
     xhr.onload = function (){
         if(this.status == 200){
-           console.log(this.responseText);
+           var users = JSON.parse(this.responseText);
+           var output = ''
+            for(var i in users){
+                output += 
+                `<tr>
+                <td>${users[i].id}</td>
+                <td>${users[i].name}</td>
+                <td>${users[i].email}</td>
+                </tr>`
+            };
+            document.getElementById("userList").innerHTML = output;
         }
     };
     xhr.onerror = function (){
